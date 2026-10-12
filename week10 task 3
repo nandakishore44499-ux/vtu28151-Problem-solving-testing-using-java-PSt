@@ -1,0 +1,31 @@
+
+# Browser History using Stack
+
+history = []
+
+def visit_page(page):
+    history.append(page)
+    print("Visited:", page)
+
+def go_back():
+    if history:
+        print("Going back from:", history.pop())
+    else:
+        print("No history available")
+
+def display_history():
+    print("Browser History:", history)
+
+# Visiting pages
+visit_page("Google")
+visit_page("YouTube")
+visit_page("GitHub")
+
+display_history()
+
+# Back button
+go_back()
+display_history()
+
+go_back()
+display_history()
