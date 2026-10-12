@@ -1,0 +1,81 @@
+import java.util.*;
+
+class Product {
+    int id;
+    String name;
+    double price;
+
+    Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public String toString() {
+        return id + " " + name + " Rs." + price;
+    }
+}
+
+class Order implements Comparable<Order> {
+    int orderId;
+    int priority;
+
+    Order(int orderId, int priority) {
+        this.orderId = orderId;
+        this.priority = priority;
+    }
+
+    public int compareTo(Order other) {
+        return Integer.compare(other.priority, this.priority);
+    }
+
+    public String toString() {
+        return "Order ID: " + orderId +
+               ", Priority: " + priority;
+    }
+}
+
+public class ShoppingSystem {
+    public static void main(String[] args) {
+        ArrayList<Product> products = new ArrayList<>();
+        HashMap<Integer, Product> productMap = new HashMap<>();
+        PriorityQueue<Order> orders = new PriorityQueue<>();
+
+        Product p1 = new Product(101, "Laptop", 55000);
+        Product p2 = new Product(102, "Phone", 20000);
+        Product p3 = new Product(103, "Headphones", 1500);
+
+        products.add(p1);
+        products.add(p2);
+        products.add(p3);
+
+        productMap.put(p1.id, p1);
+        productMap.put(p2.id, p2);
+        productMap.put(p3.id, p3);
+
+        System.out.println("Available Products:");
+        for (Product p : products) {
+            System.out.println(p);
+        }
+
+        int searchId = 102;
+        System.out.println("\nSearching Product ID: " + searchId);
+
+        Product found = productMap.get(searchId);
+
+        if (found != null) {
+            System.out.println("Found: " + found);
+        } else {
+            System.out.println("Product not found");
+        }
+
+        orders.add(new Order(501, 2));
+        orders.add(new Order(502, 5));
+        orders.add(new Order(503, 3));
+
+        System.out.println("\nProcessing Orders:");
+        while (!orders.isEmpty()) {
+            System.out.println(orders.poll());
+        }
+    }
+}
