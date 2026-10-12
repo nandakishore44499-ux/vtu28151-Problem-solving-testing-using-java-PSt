@@ -1,0 +1,40 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter array size: ");
+        int n = sc.nextInt();
+
+        int[] nums = new int[n];
+        HashMap<Integer, Integer> count = new HashMap<>();
+
+        System.out.println("Enter array elements:");
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+            count.put(nums[i],
+                count.getOrDefault(nums[i], 0) + 1);
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (count.get(nums[i]) > n / 2) {
+                System.out.println("Majority element: " + nums[i]);
+                System.out.println("First index: " +
+                    firstIndex(nums, nums[i]));
+                break;
+            }
+        }
+
+        sc.close();
+    }
+
+    static int firstIndex(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
